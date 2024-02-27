@@ -1,0 +1,20 @@
+server:
+  port: 8887
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc://localhost:3306/questionnaire?serverTimezone=Hongkong
+    username: root
+    password: 123456
+
+
+# mybatis设置
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.etw.application.pojo.**
+  configuration:
+    #    驼峰功能
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
