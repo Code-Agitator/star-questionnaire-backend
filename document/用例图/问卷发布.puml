@@ -1,0 +1,40 @@
+/** 标题注释区
+@startuml
+'配置区
+
+' 顶部
+'header 食途科技
+'title 登录/注册
+'主体区
+
+管理员用户 --> (新建问卷表单)
+管理员用户 --> (编辑问卷表单)
+管理员用户 --> (发布问卷表单)
+
+
+
+'尾部
+'caption
+'说明:
+'登录/注册用例
+'
+'end caption
+
+
+'样式区
+<style>
+
+caption{
+FontColor Black
+}
+header{
+FontColor Black
+FontSize 18
+}
+</style>
+
+@enduml
+
+@startuml
+help themes
+@enduml

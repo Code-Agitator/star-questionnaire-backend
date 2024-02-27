@@ -1,0 +1,88 @@
+
+/** 标题注释区
+@startuml
+scale 1920*1080
+'配置区
+
+
+' 顶部
+' header 食途科技
+'title 动态
+'主体区
+(*)--> 点击进入小程序or网页端
+-> 一键微信登录or用户名密码登录
+-> 系统进行登录鉴权
+--> 进入应用首页
+-left> 点击问卷查看详细
+
+
+'尾部
+'caption
+'说明:
+'动态模块业务流程
+
+'end caption
+
+
+'样式区
+<style>
+
+caption{
+FontColor Black
+}
+header{
+FontColor Black
+FontSize 18
+}
+</style>
+
+@enduml
+
+
+
+
+/** 标题注释区
+@startuml
+scale 1920*1080
+'配置区
+
+
+' 顶部
+' header 食途科技
+'title 动态
+'主体区
+(*)-> 用户密码登录
+-> 系统鉴权
+-> 进入管理员首页
+-> 进入动态首页
+--> 点击新建问卷
+-left> 设置表单项
+-left> 设置表单图层
+--> 设置页面属性
+-left> 保存草稿or发布问卷
+--> (*)
+
+'尾部
+'caption
+'说明:
+'动态模块业务流程
+
+'end caption
+
+
+'样式区
+<style>
+
+caption{
+FontColor Black
+}
+header{
+FontColor Black
+FontSize 18
+}
+</style>
+
+@enduml
+
+
+

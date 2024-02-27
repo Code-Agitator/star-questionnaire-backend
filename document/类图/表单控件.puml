@@ -1,0 +1,14 @@
+@startuml
+class Questionnaire
+class ComponentProps
+abstract class Component
+class QuestionInfo extends Component
+class QuestionTitle extends Component
+class QuestionInput extends Component
+class QuestionParagraph extends Component
+class QuestionTextarea extends Component
+class QuestionRadio extends Component
+class QuestionCheckbox extends Component
+Questionnaire *-- Component
+ComponentProps -right-* Component
+@enduml
