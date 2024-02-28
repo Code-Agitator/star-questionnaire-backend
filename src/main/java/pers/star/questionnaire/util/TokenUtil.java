@@ -23,21 +23,21 @@ public class TokenUtil {
         }
         final String tokenStr = getToken(request);
         if (CharSequenceUtil.isBlank(tokenStr)) {
-            throw new UnauthorizedException(ResultCode.USER_NOT_LOGIN);
+            throw new UnauthorizedException("未登录");
         }
 
         try {
             TokenUserInfo userInfo = tokenService.getUserInfo(tokenStr);
             if (userInfo == null || userInfo.getId() == null) {
-                throw new UnauthorizedException(ResultCode.USER_NOT_LOGIN);
+                throw new UnauthorizedException("未登录");
             }
             request.setAttribute(WebMvcConstant.USER_INFO_FIELD_IN_REQUEST, userInfo);
             return userInfo;
         } catch (JWTException e) {
             if (e instanceof JWTExpiredException) {
-                throw new UnauthorizedException(ResultCode.USER_TOKEN_EXPIRES);
+                throw new UnauthorizedException("登录过期");
             } else {
-                throw new UnauthorizedException(ResultCode.USER_TOKEN_ILLEGAL);
+                throw new UnauthorizedException("未登录");
             }
         }
 
