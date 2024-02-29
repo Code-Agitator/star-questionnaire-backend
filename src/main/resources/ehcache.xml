@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         updateCheck="true" monitoring="autodetect"
+         dynamicConfig="true">
+    <cache
+            name="acl"
+            eternal="false"
+            diskPersistent="false"
+            maxElementsInMemory="1000"
+            overflowToDisk="false"
+            timeToIdleSeconds="10"
+            timeToLiveSeconds="10"
+            memoryStoreEvictionPolicy="LRU"/>
+
+</ehcache>

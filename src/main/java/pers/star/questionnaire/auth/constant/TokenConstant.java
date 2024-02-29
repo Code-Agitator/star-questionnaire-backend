@@ -5,7 +5,7 @@ package pers.star.questionnaire.auth.constant;
  */
 public class TokenConstant {
 
-    public static final String TOKEN_FIELD = "etoken";
+    public static final String TOKEN_FIELD = "token";
 
     private TokenConstant() {
 

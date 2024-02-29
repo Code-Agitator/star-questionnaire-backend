@@ -4,9 +4,15 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc://localhost:3306/questionnaire?serverTimezone=Hongkong
+    url: jdbc:mysql://localhost:3306/questionnaire?serverTimezone=Hongkong
     username: root
     password: 123456
+  main:
+    allow-circular-references: true
+  cache:
+    type: ehcache
+  profiles:
+    active: dev
 
 
 # mybatis设置

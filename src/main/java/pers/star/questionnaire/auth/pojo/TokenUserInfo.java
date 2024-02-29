@@ -11,6 +11,7 @@ public class TokenUserInfo {
      */
     private Integer id;
 
+    private String username;
 
 
     /**
@@ -19,16 +20,19 @@ public class TokenUserInfo {
     private String email;
 
 
-
     /**
      * 上一次登录时间
      */
     private Long lastLoginTime;
 
 
-
     /**
      * 微信openid
      */
     private String wxOpenid;
+
+    @Override
+    public String toString() {
+        return username;
+    }
 }

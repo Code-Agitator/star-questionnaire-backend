@@ -12,7 +12,7 @@ public class TokenInfo {
     /**
      * 访问 token
      */
-    String accessToken;
+    String token;
     /**
      * 刷新 token
      */

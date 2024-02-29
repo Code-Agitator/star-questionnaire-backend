@@ -60,7 +60,7 @@ public class TokenServiceImpl implements TokenService {
         return TokenInfo.builder()
                 .expireIn(now.getTime() + tokenProperties.getKeepLiveTime())
                 .refreshTokenExpireIn(now.getTime() + tokenProperties.getKeepRefreshLiveTime())
-                .accessToken(createToken(subject, tokenProperties.getKeepLiveTime()))
+                .token(createToken(subject, tokenProperties.getKeepLiveTime()))
                 .refreshToken(createToken(subject, tokenProperties.getKeepRefreshLiveTime())).build();
     }
 
@@ -78,7 +78,7 @@ public class TokenServiceImpl implements TokenService {
             return TokenInfo.builder()
                     .expireIn(System.currentTimeMillis() + tokenProperties.getKeepLiveTime())
                     .refreshTokenExpireIn(expiresAt.getTime())
-                    .accessToken(createToken(((JSONObject) jwt.getPayload(TokenConstant.TokenSubjectField.USER_INFO)).toBean(TokenUserInfo.class), tokenProperties.getKeepLiveTime()))
+                    .token(createToken(((JSONObject) jwt.getPayload(TokenConstant.TokenSubjectField.USER_INFO)).toBean(TokenUserInfo.class), tokenProperties.getKeepLiveTime()))
                     .refreshToken(refreshToken).build();
         } catch (JSONException e) {
             throw new JWTIllegalException("current refresh token is illegal");
