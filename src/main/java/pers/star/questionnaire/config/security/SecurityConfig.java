@@ -1,6 +1,10 @@
 package pers.star.questionnaire.config.security;
 
+import cn.hutool.core.util.IdUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -29,12 +33,14 @@ import pers.star.questionnaire.auth.service.TokenService;
 import pers.star.questionnaire.common.ErrorMessage;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.util.Arrays;
 
 @Configuration
 @EnableCaching
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+@Slf4j
 public class SecurityConfig extends GlobalMethodSecurityConfiguration {
     @Resource
     private ObjectMapper objectMapper;
@@ -74,10 +80,33 @@ public class SecurityConfig extends GlobalMethodSecurityConfiguration {
 
     private AccessDeniedHandler handleException() {
         return (request, response, accessDeniedException) -> {
+            logException(accessDeniedException, request);
             response.getWriter().println(objectMapper.writeValueAsString(new ErrorMessage(accessDeniedException.getMessage())));
         };
     }
 
+    private void logException(Exception ex, HttpServletRequest request) {
+        String traceId = IdUtil.fastSimpleUUID();
+        String message = getExceptionMessage(ex);
+        String throwAt = getThrowAt(ex);
+        log.error("[{}] {} => at:[{}] track:[{}] {}", request.getMethod(), request.getRequestURI(), throwAt, traceId, message);
+    }
+
+    private String getThrowAt(Exception ex) {
+        StackTraceElement[] stackTrace = ex.getStackTrace();
+        if (ObjectUtils.isEmpty(stackTrace)) {
+            return "";
+        }
+        StackTraceElement stackTraceElement = stackTrace[0];
+        return stackTraceElement.getClassName() + ":" + stackTraceElement.getLineNumber();
+    }
+
+    private String getExceptionMessage(Exception exception) {
+        StringBuilder message = new StringBuilder();
+        Throwable ex = ExceptionUtils.getRootCause(exception);
+        message.append(ex.getClass().getSimpleName()).append(":").append(ex.getMessage());
+        return message.toString();
+    }
 
     private String[] swaggerUrlPermitAll() {
         return new String[]{

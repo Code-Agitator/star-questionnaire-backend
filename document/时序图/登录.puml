@@ -1,0 +1,7 @@
+@startuml
+前端 -> 业务系统:发起登录
+业务系统 -> 业务系统:认证并生成token
+业务系统 --> 前端:分发token
+前端 -> SpringSecurity过滤链:携带token
+SpringSecurity过滤链 -> SecurityContext:保持登录
+@enduml

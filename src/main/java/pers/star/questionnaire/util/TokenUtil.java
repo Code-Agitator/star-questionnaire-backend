@@ -27,7 +27,7 @@ public class TokenUtil {
             throw new ServerException("未登录");
         }
         Object principal = authentication.getPrincipal();
-        request.setAttribute(WebMvcConstant.USER_INFO_FIELD_IN_REQUEST, (TokenUserInfo) principal);
+        request.setAttribute(WebMvcConstant.USER_INFO_FIELD_IN_REQUEST, principal);
         return (TokenUserInfo) principal;
 
 
