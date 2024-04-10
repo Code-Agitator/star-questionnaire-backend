@@ -1,0 +1,44 @@
+/** 标题注释区
+@startuml
+scale 1920*1080
+'配置区
+
+
+' 顶部
+' header 食途科技
+'title 动态
+'主体区
+start
+:生成traceId;
+if (是否为未知异常?) is (是) then
+  :输出完整的异常栈;
+endif
+:解析异常信息;
+:解析出现异常代码行数;
+:输出日志;
+end
+
+'尾部
+'caption
+'说明:
+'动态模块业务流程
+
+'end caption
+
+
+'样式区
+<style>
+
+caption{
+FontColor Black
+}
+header{
+FontColor Black
+FontSize 18
+}
+</style>
+
+@enduml
+
+
+

@@ -1,0 +1,51 @@
+/** 标题注释区
+@startuml
+scale 1920*1080
+'配置区
+
+
+' 顶部
+' header 食途科技
+'title 动态
+'主体区
+start
+:访问服务;
+if (路径是否以/api开头?) is (是) then
+  if(是否为DEV环境?) is (是) then
+    :直接通过;
+    end
+  endif
+endif
+:由自定义的Filter进行JWT校验;
+:后续过滤器;
+if(SpringContext中存在认证信息?) is (是) then
+  :通过;
+else (否)
+  :触发AccessDenied;
+endif
+end
+
+'尾部
+'caption
+'说明:
+'动态模块业务流程
+
+'end caption
+
+
+'样式区
+<style>
+
+caption{
+FontColor Black
+}
+header{
+FontColor Black
+FontSize 18
+}
+</style>
+
+@enduml
+
+
+

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapp
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pers.star.questionnaire.advice.exception.children.ServerException;
 import pers.star.questionnaire.domain.QComponent;
@@ -23,6 +24,7 @@ public class QuestionController {
     private QuestionService questionService;
 
     @PostMapping("/api/question")
+    @PreAuthorize("hasRole('ADMIN')")
     public Map<String, Object> saveQuestion() {
         Question question = new Question();
         question.setTitle("新的问卷");
