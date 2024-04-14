@@ -24,7 +24,6 @@ public class QuestionController {
     private QuestionService questionService;
 
     @PostMapping("/api/question")
-    @PreAuthorize("hasRole('ADMIN')")
     public Map<String, Object> saveQuestion() {
         Question question = new Question();
         question.setTitle("新的问卷");

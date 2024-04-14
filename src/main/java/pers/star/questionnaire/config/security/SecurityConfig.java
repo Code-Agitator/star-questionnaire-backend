@@ -29,6 +29,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import pers.star.questionnaire.auth.service.TokenService;
 import pers.star.questionnaire.common.ErrorMessage;
 
@@ -36,6 +39,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableCaching
@@ -56,13 +60,23 @@ public class SecurityConfig extends GlobalMethodSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain security(HttpSecurity http, UserDetailsService userDetailsService, TokenService tokenService) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers(isDev() ? "/api/**/**" : "").permitAll()
-                .antMatchers(swaggerUrlPermitAll()).permitAll()
-                .anyRequest().authenticated();
 
+        if (isDev()) {
+            http
+                    .authorizeRequests()
+                    .antMatchers("/api/**/**").permitAll()
+                    .antMatchers(swaggerUrlPermitAll()).permitAll()
+                    .anyRequest().authenticated();
+        } else {
+            http
+                    .authorizeRequests()
+                    .antMatchers("/api/user/**").permitAll()
+                    .antMatchers(swaggerUrlPermitAll()).permitAll()
+                    .anyRequest().authenticated();
+        }
         http.csrf().disable()
+                .cors().configurationSource(corsConfigSource())
+                .and()
                 .formLogin().disable()
                 .userDetailsService(userDetailsService)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -143,8 +157,6 @@ public class SecurityConfig extends GlobalMethodSecurityConfiguration {
 
     /**
      * Acl会被频繁访问，所以设置缓存相当有必要
-     *
-     * @return
      */
     private SpringCacheBasedAclCache aclCache() {
         return new SpringCacheBasedAclCache(
@@ -166,4 +178,18 @@ public class SecurityConfig extends GlobalMethodSecurityConfiguration {
     private JdbcMutableAclService aclService() {
         return new JdbcMutableAclService(dataSource, this.lookupStrategy(), this.aclCache());
     }
+
+
+    private CorsConfigurationSource corsConfigSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedHeaders(Collections.singletonList("*"));
+        configuration.setAllowedOrigins(Collections.singletonList("*"));
+        configuration.setAllowedMethods(Collections.singletonList("*"));
+        configuration.setMaxAge(3600L);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+
 }

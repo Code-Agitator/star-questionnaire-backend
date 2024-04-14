@@ -32,7 +32,6 @@ public class OSSConfig {
     /**
      * 上传类型
      */
-
     Map<String, TargetType> targetTypeMap;
 
     @Resource

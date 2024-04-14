@@ -17,7 +17,6 @@ public class OSSProperties {
     /**
      * 目标类型
      */
-
     List<TargetType> targetType;
 
 }

@@ -2,10 +2,7 @@ package pers.star.questionnaire.controller;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pers.star.questionnaire.advice.exception.children.ServerException;
 import pers.star.questionnaire.anno.CurrentUser;
 import pers.star.questionnaire.auth.pojo.TokenInfo;
@@ -19,6 +16,7 @@ import javax.annotation.Resource;
 import java.util.Objects;
 
 @RestController
+@CrossOrigin
 public class UserController {
     @Resource
     private SysUserService sysUserService;

@@ -12,7 +12,7 @@ spring:
   cache:
     type: ehcache
   profiles:
-    active: dev
+    active: de
 
 
 # mybatis设置
