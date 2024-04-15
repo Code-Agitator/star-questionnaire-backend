@@ -1,0 +1,48 @@
+/** 标题注释区
+@startuml
+scale 1920*1080
+'配置区
+
+
+' 顶部
+' header 食途科技
+'title 动态
+'主体区
+start
+:用户登录;
+if(用户名是否存在?) then(用户名存在)
+    :用户密码是否正确?;
+    if(密码正确) then(密码正确)
+        :分发Token;
+        stop
+    else(密码错误)
+        :密码错误;
+        stop
+    endif
+else()
+end
+
+'尾部
+'caption
+'说明:
+'动态模块业务流程
+
+'end caption
+
+
+'样式区
+<style>
+
+caption{
+FontColor Black
+}
+header{
+FontColor Black
+FontSize 18
+}
+</style>
+
+@enduml
+
+
+

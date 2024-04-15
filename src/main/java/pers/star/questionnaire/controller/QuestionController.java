@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapp
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pers.star.questionnaire.advice.exception.children.ServerException;
 import pers.star.questionnaire.domain.QComponent;
@@ -72,6 +71,10 @@ public class QuestionController {
     @PatchMapping("/api/question/{id}")
     public void updateQuestion(@PathVariable Integer id, @RequestBody Question question) {
         question.setId(id);
+        List<QComponent> componentList = question.getComponentList();
+        componentList.forEach(v -> {
+            v.setFeId(v.getFe_id());
+        });
         questionService.updateById(question);
     }
 

@@ -1,0 +1,19 @@
+@startuml
+enum ComponentPropsType{
+    QuestionInputPropsType
+    QuestionTitlePropsType
+    QuestionParagraphPropsType
+    QuestionInfoPropsType
+    QuestionTextareaPropsType
+    QuestionRadioPropsType
+    QuestionCheckboxPropsType
+}
+class ComponentConfigType{
+    String title
+    String type
+    ComponentPropsType component
+    ComponentPropsType propComponent
+    ComponentPropsType defaultProp
+    ComponentStateType componentStat
+}
+@enduml

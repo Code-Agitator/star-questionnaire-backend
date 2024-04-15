@@ -10,13 +10,15 @@ scale 1920*1080
 '主体区
 start
 :访问服务;
-if (路径是否以/api开头?) is (是) then
-  if(是否为DEV环境?) is (是) then
+if (路径是否以/api开头 or 是否为DEV环境?) is (是) then
     :直接通过;
-    end
-  endif
 endif
 :由自定义的Filter进行JWT校验;
+if(认证通过?) is (是) then
+  :通过;
+else (否)
+  :触发AccessDenied;
+endif
 :后续过滤器;
 if(SpringContext中存在认证信息?) is (是) then
   :通过;

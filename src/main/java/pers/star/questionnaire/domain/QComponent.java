@@ -8,6 +8,7 @@ import java.util.Map;
 @Data
 @Builder
 public class QComponent {
+    private String fe_id;
     private String feId;
     private String type;
     private String title;
@@ -15,4 +16,5 @@ public class QComponent {
     private boolean isLocked;
 
     private Map<String, Object> props;
+
 }
