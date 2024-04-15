@@ -45,7 +45,7 @@ public class StateController {
                 if (StringUtils.isBlank(item)) {
                     continue;
                 }
-                counter.put(item, counter.getOrDefault(item, 0));
+                counter.put(item, counter.getOrDefault(item, 0) + 1);
             }
 
         });

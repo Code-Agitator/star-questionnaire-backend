@@ -69,5 +69,10 @@ public class UserController {
         return sysUserService.getById(userInfo.getId());
     }
 
+    @PutMapping("/api/user/info")
+    public SysUser updateUser(@CurrentUser TokenUserInfo userInfo, @RequestBody SysUser user) {
+        sysUserService.updateById(user);
+        return user;
+    }
 
 }
