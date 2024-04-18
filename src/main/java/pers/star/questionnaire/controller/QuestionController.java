@@ -72,9 +72,11 @@ public class QuestionController {
     public void updateQuestion(@PathVariable Integer id, @RequestBody Question question) {
         question.setId(id);
         List<QComponent> componentList = question.getComponentList();
-        componentList.forEach(v -> {
-            v.setFeId(v.getFe_id());
-        });
+        if (ObjectUtils.isNotEmpty(componentList)) {
+            componentList.forEach(v -> {
+                v.setFeId(v.getFe_id());
+            });
+        }
         questionService.updateById(question);
     }
 
